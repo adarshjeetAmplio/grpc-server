@@ -7,6 +7,7 @@ import (
 
 	"github.com/adarshjeetAmplio/grpc-server/internal/data"
 	proto "github.com/adarshjeetAmplio/grpc-server/proto"
+	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )
@@ -16,11 +17,15 @@ type server struct {
 }
 
 func main() {
+	if err := godotenv.Load(); err != nil {
+		log.Fatal("Error loading .env file")
+	}
 	data.InitDatabase()
 	NewGRPC()
 }
 
 func NewGRPC() {
+	
 	listener, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)

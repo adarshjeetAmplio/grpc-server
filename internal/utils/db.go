@@ -37,11 +37,6 @@ func InitializeDatabaseLayer(dbHost, dbPort, dbName, dbUser, dbPassword string, 
 		return err
 	}
 
-	// err = autoMigrate(db, migrations, initSchema)
-
-	// if err != nil {
-	// 	return err
-	// }
 	database, err := db.DB()
 	if err != nil {
 		return err
@@ -54,7 +49,7 @@ func InitializeDatabaseLayer(dbHost, dbPort, dbName, dbUser, dbPassword string, 
 	return nil
 }
 func setupPostgres(dbHost, dbPort, dbName, dbUser, dbPassword string, dbSchema string ) (*gorm.DB, error) {
-	connnectionString := fmt.Sprintf("host=%s post=%s user=%s dbname=%s password=%s", dbHost, dbPort, dbUser, dbName, dbPassword)
+	connnectionString := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s", dbHost, dbPort, dbUser, dbName, dbPassword)
 
 	return gorm.Open(postgres.Open(connnectionString), &gorm.Config{
 		NamingStrategy: schema.NamingStrategy{
